@@ -242,7 +242,7 @@ div.top-card {
 	height: 400px;
 	background: linear-gradient(to bottom right, #b71c1c, #212121);
 	cursor: pointer;
-	margin-top: 15px;
+	margin: 15px 0 15px 0;
 	border-radius: 10px;
 }
 
@@ -336,4 +336,10 @@ div.top-card {
 .favName {
 	font-size: 20px;
 	color: rgb(96, 36, 104);
+}
+
+.center-favoris {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

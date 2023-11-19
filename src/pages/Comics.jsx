@@ -3,6 +3,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { baseUrl } from "../api";
 
+import Footer from "../components/Footer";
+
 const addEllipsis = (text, maxLength) => {
 	return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
 };
@@ -112,7 +114,7 @@ const Comics = () => {
 					</button>
 				</div>
 			</section>
-			<footer className="container">Je suis le footer</footer>
+			<Footer />
 		</main>
 	);
 };

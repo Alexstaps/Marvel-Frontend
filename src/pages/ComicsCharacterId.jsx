@@ -60,15 +60,6 @@ const ComicsCharacterId = () => {
 										{addEllipsis(elem.title, 20)}
 									</h2>
 								</div>
-								<div className="bottom-card">
-									{elem.description ? (
-										<h3 className="character-description">
-											{addEllipsis(elem.description, 20)}
-										</h3>
-									) : (
-										<h3>Description non disponible</h3>
-									)}
-								</div>
 							</Link>
 						);
 					})}
