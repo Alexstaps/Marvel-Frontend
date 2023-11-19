@@ -19,7 +19,7 @@ const Comics = () => {
 				const response = await axios.get(
 					`${baseUrl}/comics?title=${search}&skip=${offsetComics}`
 				);
-				console.log("data =>", response.data);
+				// console.log("data =>", response.data);
 
 				setData(response.data);
 				setIsLoading(false);
@@ -54,35 +54,30 @@ const Comics = () => {
 			</div>
 			<section className="container">
 				<div className="flex-parent">
-					{data.results.map((elem) => {
+					{data.results.map((comic) => {
 						return (
-							<Link
-								to={`/comic/${elem._id}`}
-								key={elem._id}
-								className="cards-comic"
-							>
-								<div className="middle-card-comic">
-									<img
-										src={elem.thumbnail.path + "." + elem.thumbnail.extension}
-										alt=""
-										className="comic-img"
-									/>
-								</div>
-								<div className="top-card">
-									<h2 className="character-name">
-										{addEllipsis(elem.title, 20)}
-									</h2>
-								</div>
-								<div className="bottom-card">
-									{elem.description ? (
-										<h3 className="character-description">
-											{addEllipsis(elem.description, 20)}
-										</h3>
-									) : (
-										<h3>Description non disponible</h3>
-									)}
-								</div>
-							</Link>
+							<>
+								<Link
+									to={`/comic/${comic._id}`}
+									key={comic._id}
+									className="cards-comic"
+								>
+									<div className="middle-card-comic">
+										<img
+											src={
+												comic.thumbnail.path + "." + comic.thumbnail.extension
+											}
+											alt=""
+											className="comic-img"
+										/>
+									</div>
+									<div className="top-card-comic">
+										<h2 className="character-name">
+											{addEllipsis(comic.title, 20)}
+										</h2>
+									</div>
+								</Link>
+							</>
 						);
 					})}
 				</div>
@@ -96,11 +91,12 @@ const Comics = () => {
 								let newOffset = offsetComics - 100;
 								setOffsetComics(newOffset);
 							}}
+							className="pagination-button"
 						>
 							page précédente
 						</button>
 					) : (
-						<button className="display-none">page précédente</button>
+						<button className="pagination-button">page précédente</button>
 					)}
 
 					<button
@@ -110,6 +106,7 @@ const Comics = () => {
 							let newOffset = offsetComics + 100;
 							setOffsetComics(newOffset);
 						}}
+						className="pagination-button"
 					>
 						page suivante
 					</button>

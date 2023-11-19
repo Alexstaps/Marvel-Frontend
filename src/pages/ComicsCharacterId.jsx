@@ -3,6 +3,7 @@ import axios from "axios";
 // import { Link } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 import { baseUrl } from "../api";
+import Footer from "../components/Footer";
 
 const addEllipsis = (text, maxLength) => {
 	return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
@@ -16,7 +17,7 @@ const ComicsCharacterId = () => {
 	// console.log("lES PARAMS =>", params);
 
 	useEffect(() => {
-		console.log("JE SUIS UNE NOUVELLE REPONSE");
+		// console.log("JE SUIS UNE NOUVELLE REPONSE");
 		const fetchData = async () => {
 			try {
 				const response = await axios.get(`${baseUrl}/comics/${id}`);
@@ -36,9 +37,11 @@ const ComicsCharacterId = () => {
 	) : (
 		<main>
 			{console.log(data)}
-			<section className="container">
+			<section className="container neon-rouge">
+				<h2 className="intro-comics">Liste des films du héros</h2>
 				<div className="flex-parent">
 					{data.comics.map((elem) => {
+						console.log("data à récuperer pour l'affichage ===>", elem);
 						return (
 							<Link
 								to={`/comic/${elem._id}`}
@@ -71,7 +74,7 @@ const ComicsCharacterId = () => {
 					})}
 				</div>
 			</section>
-			<footer className="container">Je suis le footer</footer>
+			<Footer />
 		</main>
 	);
 };

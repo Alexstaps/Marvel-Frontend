@@ -1,12 +1,16 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import { useState } from "react";
+// import Cookies from "js-cookie";
 
+// pages
 import Home from "./pages/Home";
 import Comics from "./pages/Comics";
 import ComicsCharacterId from "./pages/ComicsCharacterId";
 import ComicsComicId from "./pages/ComicsComicId";
+import Favoris from "./pages/favoris";
 
+//composant
 import Header from "./components/Header";
 
 function App() {
@@ -19,6 +23,7 @@ function App() {
 					<Route path="/comics" element={<Comics />} />
 					<Route path="/comics/:characterId" element={<ComicsCharacterId />} />
 					<Route path="/comic/:comicId" element={<ComicsComicId />} />
+					<Route path="/favoris" element={<Favoris />} />
 				</Routes>
 			</Router>
 		</>

@@ -15,17 +15,17 @@ const Header = () => {
 
 					<div className="navigation-item">
 						<Link to="/">
-							<button>Personnages</button>
+							<button className="header-button">Personnages</button>
 						</Link>
 						<Link to="/comics">
-							<button>Comics</button>
+							<button className="header-button">Comics</button>
 						</Link>
-						<Link to="/">
-							<button>Favoris</button>
+						<Link to="/favoris">
+							<button className="header-button">Favoris</button>
 						</Link>
 					</div>
 					<div>
-						<button>Login</button>
+						<button className="header-button login">Login</button>
 					</div>
 				</div>
 			</header>

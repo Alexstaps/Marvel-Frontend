@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { baseUrl } from "../api";
+// import useLocalStorage from "use-local-storage";
+
+import Footer from "../components/Footer";
 
 const addEllipsis = (text, maxLength) => {
 	return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
@@ -28,7 +31,10 @@ const Home = () => {
 			}
 		};
 		fetchData();
-	}, [search, offsetCharacter]); //offset ]);
+	}, [search, offsetCharacter]);
+
+	//FAVORIS
+
 	return isLoading ? (
 		<p>Loading ...</p>
 	) : (
@@ -59,36 +65,53 @@ const Home = () => {
 				</div>
 				<section className="container">
 					<div className="flex-parent">
-						{data.results.map((elem) => {
-							// console.log("MA REPONSE EST ICI", elem);
+						{data.results.map((character) => {
+							// console.log("INFOS POUR LE PERSO ====>", character);
 							return (
-								<Link
-									to={`/comics/${elem._id}`}
-									key={elem._id}
-									className="cards"
-								>
-									<div className="top-card">
-										<h2 className="character-name">
-											{addEllipsis(elem.name, 20)}
-										</h2>
-									</div>
-									<div className="middle-card">
-										<img
-											src={elem.thumbnail.path + "." + elem.thumbnail.extension}
-											alt=""
-											className="character-img"
-										/>
-									</div>
-									<div className="bottom-card">
-										{elem.description ? (
-											<h3 className="character-description">
-												{addEllipsis(elem.description, 10)}
-											</h3>
-										) : (
-											<h3>Description non disponible</h3>
-										)}
-									</div>
-								</Link>
+								<div key={character._id} className="complete-cards">
+									<Link
+										to={`/comics/${character._id}`}
+										data={character}
+										className="cards"
+									>
+										<div className="top-card">
+											<h2 className="character-name">
+												{addEllipsis(character.name, 20)}
+											</h2>
+										</div>
+										<div className="middle-card">
+											<img
+												src={
+													character.thumbnail.path +
+													"." +
+													character.thumbnail.extension
+												}
+												alt=""
+												className="character-img"
+											/>
+										</div>
+									</Link>
+									<button
+										onClick={() => {
+											const characterFav = {
+												nameChar: character.name,
+												imgChar:
+													character.thumbnail.path +
+													"." +
+													character.thumbnail.extension,
+												id: character._id,
+											};
+
+											localStorage.setItem(
+												"characterFav",
+												JSON.stringify(characterFav)
+											);
+										}}
+										className="addfav"
+									>
+										Ajouter en Favoris
+									</button>
+								</div>
 							);
 						})}
 					</div>
@@ -101,11 +124,12 @@ const Home = () => {
 									let newOffset = offsetCharacter - 100;
 									setOffsetCharacter(newOffset);
 								}}
+								className="pagination-button"
 							>
 								page précédente
 							</button>
 						) : (
-							<button className="display-none">page précédente</button>
+							<button className="pagination-button">page précédente</button>
 						)}
 
 						<button
@@ -115,12 +139,13 @@ const Home = () => {
 								let newOffset = offsetCharacter + 100;
 								setOffsetCharacter(newOffset);
 							}}
+							className="pagination-button"
 						>
 							page suivante
 						</button>
 					</div>
 				</section>
-				<footer className="container">Je suis le footer</footer>
+				<Footer />
 			</main>
 		</>
 	);
